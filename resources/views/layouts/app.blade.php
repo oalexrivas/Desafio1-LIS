@@ -77,6 +77,10 @@
         <main class="py-4">
             @yield('content')
         </main>
+        <floot class="py-4 container fixed-bottom">
+            @yield('footer')
+        </foot>
     </div>
+    @yield('scripts')
 </body>
 </html>

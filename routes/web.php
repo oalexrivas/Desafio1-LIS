@@ -17,9 +17,12 @@ Route::get('/', function () {
     } else {
         return view('auth.login');
     }
-});
+})->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/RegistrarEntrada', 'EntradasController@index')->name('RegistrarEntrada');
+Route::get('/RegistrarEntrada', 'RegistrosController@entradas')->name('RegistrarEntrada');
+Route::get('/RegistrarSalida', 'RegistrosController@salidas')->name('RegistrarSalida');
+Route::get('/VerEntradas', 'RegistrosController@verEntradas')->name('VerEntradas');
+Route::get('/VerSalidas', 'RegistrosController@verSalidas')->name('VerSalidas');
+Route::post('/registrado', 'RegistrosController@guardarRegistro')->name('guardarEntrada');
