@@ -26,3 +26,5 @@ Route::get('/RegistrarSalida', 'RegistrosController@salidas')->name('RegistrarSa
 Route::get('/VerEntradas', 'RegistrosController@verEntradas')->name('VerEntradas');
 Route::get('/VerSalidas', 'RegistrosController@verSalidas')->name('VerSalidas');
 Route::post('/registrado', 'RegistrosController@guardarRegistro')->name('guardarEntrada');
+
+Route::get('/ReporteMovimientos', 'RegistrosController@reporte')->name('reporte');

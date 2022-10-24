@@ -34,7 +34,7 @@
                                 </a>
                             </div>
                             <div class="col-lg-4 col-md-6 col-12 py-1">
-                                <a class="mx-auto btn btn-dark stretched-link shadow" href="pago_servicios.html">
+                                <a class="mx-auto btn btn-dark stretched-link shadow" href="{{ route('reporte') }}">
                                     <img src="img/Saldo.png" class="img-size-trans" alt="Saldo" title="Saldo">
                                     <h6>Mostrar Balance</h6>
                                 </a>

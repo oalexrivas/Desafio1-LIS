@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use Illuminate\Http\Request;
 use App\Tiposmovimientos;
 use App\Movimientos;
@@ -40,6 +41,38 @@ class RegistrosController extends Controller
         $movs = Movimientos::where('tipo', 0)->with('tiposmovimientos')->get();
 
         return view('movimientos', ['movs' => $movs, 'tipomov'=>0]);
+    }
+
+    public function reporte()
+    {
+        $movsEntradas = Movimientos::where('tipo', 1)
+                        ->groupBy('idTipo')
+                        ->selectRaw('sum(monto) as total, idTipo')
+                        ->get();
+
+
+        $movsSalidas = Movimientos::where('tipo', 0)
+                        ->groupBy('idTipo')
+                        ->selectRaw('idTipo, sum(monto) as total')
+                        ->get();
+
+        $resumenMovs = Movimientos::groupBy('tipo')
+                        ->selectRaw('tipo, sum(monto) as total')
+                        ->get();
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        
+        //Grafica
+        $array[] = ['Tipo Movimiento', 'Montos'];
+        foreach($resumenMovs as $key => $value)
+        {
+          $array[++$key] = [$value->tipo, $value->total];
+        }
+        
+        $pdf->loadView('impresion', ['entradas'=>$movsEntradas, 'salidas'=>$movsSalidas, 'course'=>json_encode($array)]);
+
+        return $pdf->stream();
     }
 
     public function guardarRegistro()

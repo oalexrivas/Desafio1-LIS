@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card text-white bg-dark">
-                    <div class="card-header">Registrar {{ $tipomov == 1 ? 'Entrada' : 'Salida' }}</div>
+                    <div class="card-header">Movimientos de {{ $tipomov == 1 ? 'Entrada' : 'Salida' }}</div>
                     <div class="card-body">
                         <div class="row justify-content-end">
                             <div class="col-lg-3 col-12">
