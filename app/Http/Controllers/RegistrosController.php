@@ -70,8 +70,8 @@ class RegistrosController extends Controller
           $array[++$key] = [$value->tipo, $value->total];
         }
         
-        $pdf->loadView('impresion', ['entradas'=>$movsEntradas, 'salidas'=>$movsSalidas, 'course'=>json_encode($array)]);
-
+        $pdf->loadView('impresion', ['entradas'=>$movsEntradas, 'salidas'=>$movsSalidas, 'data'=>json_encode($array)]);
+        
         return $pdf->stream();
     }
 
