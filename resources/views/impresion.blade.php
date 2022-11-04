@@ -30,8 +30,11 @@
             <div class="col-12">
                 <div class="card mt-4">
                     <div class="card-header">Reporte de Movimientos</div>
+                    @php
+                        $totalon = 0
+                    @endphp
                     <div class="card-body">
-                        <div class="row">
+                        <div class="row justify-content-center">
                             <div class="col-12">
                                 <table class="table table-striped mt-2">
                                     <thead>
@@ -47,17 +50,20 @@
                                         @foreach ($entradas as $mov)
                                             <tr>
                                                 <td scope="row">{{ $mov->tiposmovimientos->nombre }}</td>
-                                                <td>{{ $mov->total }}</td>
+                                                <td>${{ $mov->total }}</td>
+                                                {{ $totalon += $mov->total }}
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                        <div class="row justify-content-center">
                             <div class="col-12">
                                 <table class="table table-striped mt-2">
                                     <thead>
                                         <tr>
-                                            <th colspan="2">Entradas</th>
+                                            <th colspan="2">Salidas</th>
                                         </tr>
                                         <tr>
                                             <th scope="col" style="width:20%">Tipo</th>
@@ -68,11 +74,17 @@
                                         @foreach ($salidas as $mov)
                                             <tr>
                                                 <td scope="row">{{ $mov->tiposmovimientos->nombre }}</td>
-                                                <td>{{ $mov->total }}</td>
+                                                <td>${{ $mov->total }}</td>
                                             </tr>
+                                            {{ $totalon += $mov->total }}
                                         @endforeach
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <h5>Balance general: ${{ $totalon }}</h5>
                             </div>
                         </div>
                     </div>
@@ -88,26 +100,5 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        //var analytics = {{ $data }};
-        document.getElementById('carta2').innerHTML = "<p>Hola mundoooo!</p>";
-        window.onload = function() {
-            
-        //     google.charts.load('current', {'packages':['corechart']});
-        //     google.charts.setOnLoadCallback(drawChart);
-        };
-
-        // function drawChart()
-        // {
-        //     document.getElementById('pie_chart').innerHTML = analytics;
-        //     var data = google.visualization.arrayToDataTable(analytics);
-        //     var options = {
-        //         title : 'Percentage of Students Courses(BCA,BCOM,BSC)'
-        //     };
-        //     var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
-        //     chart.draw(data, options);
-        // }
-    </script>
 </body>
-
 </html>
